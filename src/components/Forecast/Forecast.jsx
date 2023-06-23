@@ -5,7 +5,7 @@ const Forecast = ({ forecast }) => {
     const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     // Calculate the next 3 weekdays
     const nextWeekdays = [];
-    for (let i = 1; nextWeekdays.length < 7; i++) {
+    for (let i = 1; nextWeekdays?.length < 7; i++) {
         const nextDay = new Date(today);
         nextDay.setDate(today.getDate() + i);
         const weekDay = nextDay.getDay();
@@ -21,7 +21,7 @@ const Forecast = ({ forecast }) => {
     });
     // Remove duplicates from the filtered forecast
     const uniqueForecast = [];
-    filteredForecast.forEach((item) => {
+    filteredForecast?.forEach((item) => {
         const forecastDate = new Date(item.dt * 1000);
         const forecastWeekday = weekdays[forecastDate.getDay()];
         if (!uniqueForecast.some((uniqueItem) => uniqueItem.weekday === forecastWeekday)) {
@@ -29,16 +29,16 @@ const Forecast = ({ forecast }) => {
         }
     });
     return (
-        <div className='w-2/3 mx-auto shadow-lg bg-white mt-5 py-5 px-10 rounded h-52 '>
-            <h1 className=' text-xl mb-5'>Extended Forecast</h1>
-            <div className='flex justify-center gap-4'>
+        <div className='lg:w-2/3 mx-auto shadow-lg bg-white mt-5 py-5 px-10 rounded lg:h-52 '>
+            <h1 className=' text-xl mb-5'>Next Few days Forecast</h1>
+            <div className='lg:flex md:flex justify-center gap-4'>
                 {uniqueForecast.map((item) => {
-                    const { weekday, item: forecastItem } = item;
+                    const { weekday, item: forecastItem } = item || {};
                     return (
-                        <div className='border border-gray-500 rounded w-52 p-3' key={forecastItem.dt}>
+                        <div className='border border-gray-500 rounded w-52 p-3 max-sm:mt-8' key={forecastItem.dt}>
                             <p>{weekday}</p>
-                            <p className='text-2xl my-1'> {Math.round(forecastItem.main.temp - 273.15)}°C</p>
-                            <p> {forecastItem.weather[0].main}</p>
+                            <p className='text-2xl my-1'> {Math.round(forecastItem?.main?.temp - 273.15)}°C</p>
+                            <p> {forecastItem?.weather[0]?.main}</p>
                         </div>
                     );
                 })}

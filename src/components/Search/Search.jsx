@@ -8,7 +8,7 @@ const Search = ({ handleChange, search, value }) => {
                 onKeyPress={search}
                 className="shadow appearance-none border rounded w-2/3  py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
-                placeholder="Enter Country"
+                placeholder="Enter City Name"
                 value={value}
             />
         </div>
